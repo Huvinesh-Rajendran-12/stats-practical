@@ -1,0 +1,45 @@
+\documentclass{article}
+
+\title{First Latex Document}
+\author{Huvinesh Rajendran}
+
+\date{} 
+\begin{document}
+\maketitle{} 
+
+\begin{abstract}
+This the first sample in Latex. 
+\end{abstract}
+\section{Introduction}
+\section{Literature Review}
+\section{Data and Methods}
+\subsection{Data}
+\subsection{Methods}
+\subsubsection{Descriptive Statistics}
+\section{Results}
+\subsection{Descriptive Statistics}
+This is the graph for the cars data set. 
+
+<<Graph1,echo=FALSE>>=
+plot(cars)
+@
+
+<<Code1, echo=TRUE>>=
+summary(cars)
+@
+
+<<Code2, echo=TRUE>>= 
+Variances=var(cars$speed)
+@
+
+The variance of the speed of the cars data set is \Sexpr{Variances}
+
+The values of the $\alpha$ and $\beta$ are 
+
+\section{Discussion}
+\section{Limitations and Future Study}
+\section{Conclusion}
+This is my first Latex document.
+
+
+\end{document}
