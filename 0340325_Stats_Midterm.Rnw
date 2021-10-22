@@ -1,0 +1,245 @@
+\documentclass{article}
+
+\usepackage{authblk}
+
+
+\title{Test}
+\author{Huvinesh Rajendran (0340325)}
+
+\affil{Bachelor of Computer Science}
+
+\date{08-10-2021}
+\begin{document}
+\maketitle{}
+
+
+\section{Question 1}
+Explore and understand the R built-in mtcars data set.\\
+
+
+\textbf{Answer}\\
+<<Code1 , echo=TRUE>>=
+str(mtcars)
+@
+
+The above code block shows the exploration of the mtcars dataset.This dataset consists of 32 observations with 11 variables which are 'mpg','cyl','disp','hp',\ 'drat','wt','qsec','vs','am',\ 'gear', and 'carb'. 'mpg','drat','wt',\ and 'qsec' are continuous numerical variables because their values can be measured. 'cyl', 'disp', 'hp','vs','am','gear', and 'carb' \ are discrete numerical variables since they can be counted. 
+
+\section{Question 2}
+Describe the mtcars dataset using numerical measures.\\
+
+
+\textbf{Answer}\\
+<<Code2 , echo=TRUE>>=
+summary(mtcars)
+
+var_mpg <- var(mtcars$mpg)
+var_cyl <- var(mtcars$cyl)
+var_disp <- var(mtcars$disp)
+var_hp <- var(mtcars$hp)
+var_drat <- var(mtcars$drat)
+var_wt <- var(mtcars$wt)
+var_qsec <- var(mtcars$qsec)
+var_vs <- var(mtcars$vs)
+var_am <- var(mtcars$am)
+var_gear <- var(mtcars$gear)
+var_carb <- var(mtcars$carb)
+
+sd_mpg <- sd(mtcars$mpg)
+sd_cyl <- sd(mtcars$cyl)
+sd_disp <- sd(mtcars$disp)
+sd_hp <- sd(mtcars$hp)
+sd_drat <- sd(mtcars$drat)
+sd_wt <- sd(mtcars$wt)
+sd_qsec <- sd(mtcars$qsec)
+sd_vs <- sd(mtcars$vs)
+sd_am <- sd(mtcars$am)
+sd_gear <- sd(mtcars$gear)
+sd_carb <- sd(mtcars$carb)
+@
+
+\textbf{Description of mpg}\\
+The variance of "mpg" is \Sexpr{var_mpg}.\\
+The Standard Deviation of "mpg" is \Sexpr{sd_mpg}.\\
+
+\textbf{Description of cyl}\\
+The variance of "cyl" is \Sexpr{var_cyl}.\\
+The standard deviation of "cyl" is \Sexpr{var_cyl}.\\
+
+\textbf{Description of disp}\\
+The variance of "disp" is \Sexpr{var_disp}.\\
+The standard deviation of "disp" is \Sexpr{sd_disp}.\\
+
+\textbf{Description of hp}\\
+The variance of "hp" is \Sexpr{var_hp}.\\
+The standard deviation of "hp" is \Sexpr{sd_hp}.\\
+
+\textbf{Description of drat}\\
+The variance of "drat" is \Sexpr{var_drat}.\\
+The standard deviation of "drat" is \Sexpr{sd_drat}.\\
+
+\textbf{Description of wt}\\
+The variance of "wt" is \Sexpr{var_wt}.\\
+The standard deviation of "wt" is \Sexpr{sd_wt}.\\
+
+\textbf{Description of qsec}\\
+The variance of "qsec" is \Sexpr{var_qsec}.\\
+The standard deviation of "qsec" is \Sexpr{sd_qsec}.\\
+
+\textbf{Description of vs}\\
+The variance of "vs" is \Sexpr{var_vs}.\\
+The standard deviation of "vs" is \Sexpr{sd_vs}\\
+
+\textbf{Description of am}\\
+The variance of "am" is \Sexpr{var_am}.\\
+The standard deviation of "am" is \Sexpr{sd_am}.\\
+
+\textbf{Description of gear}\\
+The variance of "gear" is \Sexpr{var_gear}\\
+The standard deviation of "gear" is \Sexpr{sd_gear}\\
+
+\textbf{Description of carb}\\
+The variance of "carb" is \Sexpr{var_carb}\\
+The standard deviation of "carb" is \Sexpr{sd_carb}.\\
+
+
+Box plot for the variables "mpg" and "gear":
+<<Code3 , echo=TRUE>>=
+boxplot(mpg ~ gear,data=mtcars,main="MPG of different gears",col= c("green","blue","red"))
+@
+
+
+\section{Question 3}
+Describe the mtcars dataset using tables and graphs. Create a probability distribution table for disp variable.\\
+
+\textbf{Answer}\\
+<<Code4 , echo=TRUE>>=
+disp_max <- max(mtcars$disp)
+disp_min <- min(mtcars$disp)
+bin <- seq(disp_min,disp_max,by=67)
+disp<-cut(mtcars$disp,bin)
+freq_table<-transform(table(disp))
+
+transform(freq_table,Relative_Frequency=prop.table(Freq), 
+          Probability=100*prop.table(Freq))
+@
+
+\section{Question 4}
+Draw a histogram for the disp variable.\\
+
+\textbf{Answer}\\
+<<Code_1 , echo=TRUE>>=
+hist(mtcars$disp,main="Distribution of disp",col="purple",ylim = c(0,15),
+     breaks = 4)
+@
+
+The above histogram shows that the range 100-200 has the highest frequency. 
+
+\section{Question 5}
+Draw a piechart for the carb variable.\\
+
+\textbf{Answer}\\
+<<Code6 , echo=TRUE>>=
+cnt <- table(mtcars$carb)
+tot <- sum(counts)
+pr <- round((cnt*100)/tot,digits = 1)
+lbls <- paste(names(pr), ", ", pr, "%", sep = "")
+pie(pr, labels = lbls, 
+    main="Pie Chart of Proportion of Cars with Different Number of Carbs")
+@
+
+The above pie chart shows that the caruretors 2 and 4 have the highest distribution with a percentage of 31.2 %. 
+
+\section{Question 6}
+Create a contingency table for gear and carb variables.
+
+\textbf{Answer}\\
+The contingeny table for gear and carb variables 
+
+<<Code_ , echo=TRUE>>=
+gear_carb_table <- addmargins(table(mtcars$gear,mtcars$carb))
+gear_carb_table
+@
+
+This is a contingency table to show the relationship between the variables gear and carb. 
+
+\section{Question 7}
+What is the probability when there are 3 gears?
+
+\textbf{Answer}\\
+<<Code7 , echo=TRUE>>=
+probability_gear_3 <-gear_carb_table[1,7]/32
+@
+
+The probability when there are 3 gears is \Sexpr{probability_gear_3}. The number of observations with 3 gears is 15. Then it is divided by the total number of observations which is 32. 
+
+\section{Question 8}
+
+What is the probability of 3 gears given that there are 2 carbs.\\
+
+\textbf{Answer}\\
+<<Code8 , echo=TRUE>>=
+probability_gear_3_carb_2 <- gear_carb_table[1,2]/32 
+@
+
+The probability when there are 3 gears and 2 carbs is \Sexpr{probability_gear_3_carb_2}. This is because the number of 3 gears and 2 carbs is 4. Then, it is divided by the total number of observations which is 32. 
+
+
+\section{Question 9}
+Proof the Bayesian theorem using the contingency table in Question 6.
+
+\textbf{Answer}\\
+<<Code9 , echo=TRUE>>=
+probability_carb2 <- gear_carb_table[4,2] / 32 
+
+probability_gear3_given_carb2 <- 
+  probability_gear_3_carb_2/probability_carb2
+
+probability_carb2_given_gear3 <- 
+  probability_gear_3_carb_2/probability_gear_3
+@
+
+The probability of gear 3 given 2 carbs is \Sexpr{probability_gear3_given_carb2}.
+
+The probability of 2 carbs given gear 3 is \Sexpr{probability_carb2_given_gear3}.
+
+<<code10 , echo=TRUE>>=
+probability_gear3_given_carb2_2 <- 
+  (probability_carb2_given_gear3*probability_gear_3)/probability_carb2 
+@
+
+The answer of the second method of gear 3 given 2 carbs is \Sexpr{probability_gear3_given_carb2_2}.
+
+Hence, the bayesian theorem is proofed. 
+
+\section{Question 10}
+Give your solutions in Rnw file, Pdf file and the similarity report.
+
+\section{Marking Scheme}
+
+<<Code, echo=FALSE>>=
+Q1=10
+Q2=10
+Q3=10
+Q4=10
+Q5=10
+Q6=10
+Q7=10
+Q8=10
+Q9=10
+Q10=10
+Total=Q1+Q2+Q3+Q4+Q5+Q6+Q7+Q8+Q9+Q10
+Mark=Total/10
+@
+ 
+Question 1 = \Sexpr{Q1}\\
+Question 2 = \Sexpr{Q2}\\
+Question 3 = \Sexpr{Q3}\\
+Question 4 = \Sexpr{Q4}\\
+Question 5 = \Sexpr{Q5}\\
+Question 6 = \Sexpr{Q6}\\
+Question 7 = \Sexpr{Q7}\\
+Question 8 = \Sexpr{Q8}\\
+Question 9 = \Sexpr{Q9}\\
+Question 10 = \Sexpr{Q10}\\
+Total = \Sexpr{Total}\\
+Mark= \Sexpr{Mark}
